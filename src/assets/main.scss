@@ -1,0 +1,400 @@
+@import url("https://use.typekit.net/iaq6clc.css");
+
+$blue: #192150;
+$highlight1: #17b6b1;
+$highlight2: #bf7507;
+$light: rgb(240,240,240);
+$error: #ffadad;
+
+$btnBgColor: $blue;
+$btnTextColor: $light;
+$btnHoverTextColor: $light;
+$btnHoverBackground: $highlight1;
+
+$bodyBg: $blue;
+
+$spacer: 8px;
+$collapse-bp: 800px;
+$transition: 0.3s ease all;
+$border-radius: .5em;
+
+
+// Atten Round New Bold
+
+// font-family: atten-round-new, sans-serif;
+
+// font-weight: 700;
+
+// font-style: normal;
+
+
+// Atten Round New Regular Italic
+
+// font-family: atten-round-new, sans-serif;
+
+// font-weight: 400;
+
+// font-style: italic;
+
+
+// Atten Round New Bold Italic
+
+// font-family: atten-round-new, sans-serif;
+
+// font-weight: 700;
+
+// font-style: italic;
+
+
+// Atten Round New Regular
+
+// font-family: atten-round-new, sans-serif;
+
+// font-weight: 400;
+
+// font-style: normal;
+
+
+@mixin bodyFont() {
+    font-family: atten-round-new, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  @mixin upperCase() {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  @mixin headlineFont() {
+    @include upperCase;
+    @include bodyFont;
+    font-weight: 700;
+  }
+
+  
+/// TRANSITION STUFF
+
+.page-enter-active, .page-leave-active, 
+.layout-enter-active {
+  /* animation: slide-left-in .5s; */
+  animation: bounce-in .5s;
+}
+.page-enter, .page-leave-active,
+.layout-leave-active {
+  /* animation: slide-left-out .3s forwards; */
+  animation: bounce-out .5s;
+}
+@keyframes slide-left-in {
+  0% { 
+    opacity: 0;
+    transform: translate(50vw, 0);
+  }
+  /* 50% { 
+    transform: scale(1.1) 
+  } */
+  100% { 
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+@keyframes slide-left-out {
+  0% { 
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+  /* 50% { transform: scale(1.1) } */
+  100% { 
+    opacity: 0;
+    transform: translate(-50vw, 0);
+  }
+}
+
+
+
+
+.bounce-enter-active {
+  animation: bounce-in .6s;
+}
+
+.bounce-leave-active {
+  animation: bounce-out .6s;
+}
+
+@keyframes bounce-in {
+  0% { 
+    opacity: 1;
+  }
+  100% { 
+    opacity: 1;
+  }
+}
+@keyframes bounce-out {
+  0% { 
+    opacity: 1; 
+  }
+  100% { 
+    opacity: 0;
+  }
+}
+
+
+.slide-left-enter,
+.slide-right-leave-active {
+  opacity: 0;
+  transform: translate(30px, 0);
+}
+.slide-left-leave-active,
+.slide-right-enter {
+  opacity: 0;
+  transform: translate(-30px, 0);
+}
+
+
+#__layout,
+#__layout > *,
+.container {
+  min-height: 100vh;
+}
+
+
+/* default styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+    transition: $transition;
+  }
+  
+
+html {
+    font-size: 18px;
+}
+
+.container {
+    transition: all .5s cubic-bezier(.55,0,.1,1);
+}
+
+
+
+input, button, textarea {
+    border: none;
+    outline: none;
+}
+  
+  
+  
+  body {
+    background: $bodyBg;
+    color: $blue;
+    @include bodyFont;
+  }
+  
+  h1, h2, h3, h4 {
+    @include headlineFont;
+  }
+  
+  .link,
+  a {
+    color: $highlight1;
+    text-decoration: none;
+    &:hover {
+      cursor: pointer;
+      color: $highlight1;
+    }
+  }
+  
+  header,
+  section {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    text-align: center;
+  }
+  .section-wrapper {
+    background: $light;
+    color: $blue;
+  
+    // clip-path: circle(50%);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100vw;
+  
+    @media (max-width: $collapse-bp) {
+      padding: $spacer*4;
+    }
+    > * {
+      margin-bottom: $spacer*4;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+  
+
+p.error,
+.alert-danger {
+    background: $error;
+    padding: $spacer;
+    border-radius: $border-radius;
+}
+
+
+nav.understated {
+    a {
+      color: $blue;
+      font-size: 1rem;
+    }
+}
+
+
+.btn,
+a.btn {
+  @include bodyFont();
+  @include upperCase;
+  display: inline-block;
+  background: $btnBgColor;
+  color: $btnTextColor;
+  padding: 1em;
+  border-radius: $border-radius;
+  transform: scale(1);
+  &:hover {
+    cursor: pointer;
+    color: $btnHoverTextColor;
+    background: $btnHoverBackground;
+    transform: scale(0.95);
+  }
+
+  &.btn-disabled:hover {
+    cursor: default;
+    background: $btnBgColor;
+    color: $btnTextColor;
+    transform: scale(1);
+  }
+}
+
+form {
+  margin: 0 auto;
+  &.register {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin: $spacer*4;
+    flex: 1 0 40%;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  button {
+    font-size: 1em;
+  }
+
+  p {
+    max-width: 65ch;
+    margin: 0 auto;
+  }
+
+  p + p,
+  input + label {
+    margin-top: $spacer*2;
+  }
+
+  button[type="submit"] {
+    margin-top: $spacer*2;
+    align-self: center;
+  }
+}
+
+.sr-only,
+.error-hide {
+    display: none;
+}
+
+label {
+  margin-bottom: $spacer;
+}
+
+input {
+  padding: $spacer*2;
+}
+
+.container {
+  position: relative;
+}
+
+
+p.understated {
+  opacity: .8;
+  font-size: 90%;
+}
+
+
+.HomePageLogo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+
+    a {
+        padding: $spacer*2;
+        color: $light;
+        border-radius: 0 0 $border-radius 0;
+        &:hover {
+            transform: scale(1);
+            background: transparent;
+            color: $highlight1;
+        }
+    }
+}
+
+.default_layout {
+    header {
+        h1.title {
+            margin-bottom: 0;
+            font-size: 5em;
+            @media (max-width: $collapse-bp) {
+            font-size: 3em;
+            }
+        }
+        
+        h2 {
+            color: $blue;
+        }
+    }
+        
+    nav ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        > * {
+            padding-right: $spacer*2;
+            &:last-child {
+            padding-right: 0;
+            }
+        }
+    }
+      
+}
+
+.login_layout {
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .section-wrapper {
+        width: 70vw;
+    }
+}
+
